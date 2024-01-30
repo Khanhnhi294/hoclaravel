@@ -22,4 +22,3 @@ Route::get('/unicode', function () {
 Route::get('/san-pham', function () {
     return view('product');
 });
-
