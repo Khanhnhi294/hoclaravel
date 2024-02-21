@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +22,10 @@ Route::get('/', function () {
     return $html;
 });
 
-// Route::get('unicode', function(){
-//     // return 'Phương thức Get của path /unicode';
-//     return view ('form');
-// });
+Route::get('unicode', function(){
+    // return 'Phương thức Get của path /unicode';
+    return view ('form');
+});
 // Route::post('unicode', function(){
 //     return 'Phương thức Get của path /unicode';
 // });
@@ -53,24 +56,68 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function(){
     Route::get('unicode', function(){
-        // return 'Phương thức Get của path /unicode';
-        return view ('form');
+        return 'Phương thức Get của path /unicode';
+        // return view ('form');
     });
+//     Route::get('show-form', function(){
+//         return view('form');
+//     });
+//     Route::prefix('product')->group(function(){
+//         Route::get('/',function(){
+//             return 'Danh sách sản phẩm';
+//         });
+//         Route::get('add',function(){
+//             return 'Thêm sản phẩm';
+//         });
+//         Route::get('edit',function(){
+//             return 'Sửa sản phẩm';
+//         });
+//         Route::get('delete',function(){
+//             return 'Xóa sản phẩm';
+//         });
+//     });
+});
+Route::get ('/', 'App\Http\Controllers\HomeController@index')->name('home');
+
+Route::get ('/tin-tuc', 'HomeController@getNews')->name('news');
+
+Route::get('/chuyen-muc/{id}', [HomeController::class,'getCategory']);
+
+Route::get('/', function(){
+    return view('home');
+})->name('home');
+
+Route:: prefix('admin')->group(function(){
+    Route::get('tin-tuc/{id?}/{slug?}.html', function($id=null, $slug=null ){
+        $content = 'Phuong thuc get cua path /unicode voi tham so ';
+        $content.='id = '.$id .'<br>';
+        $content.='slug = '.$slug;
+        return $content;
+    })->where(
+        //validate cho bien trong URL
+        [
+            'slug'=>'.+',
+            'id'=>'[0-9]+'
+        ]
+    )->name('admin.tintuc');
+
     Route::get('show-form', function(){
         return view('form');
     });
-    Route::prefix('product')->group(function(){
-        Route::get('/',function(){
-            return 'Danh sách sản phẩm';
+    })->name('admin.show-form');
+
+    Route::prefix('products')->group(function(){
+    Route::prefix('products')->middleware('checkpermission')->group(function(){
+        Route::get('/', function (){
+            return "Danh sach san pham";
         });
-        Route::get('add',function(){
-            return 'Thêm sản phẩm';
+
+        Route::get('add', function (){
+            return "Them san pham";
         });
-        Route::get('edit',function(){
-            return 'Sửa sản phẩm';
-        });
-        Route::get('delete',function(){
-            return 'Xóa sản phẩm';
-        });
+        })->name('admin.products.add');
+
+        Route::get('edit', function (){
+            return "Sua san pham";
     });
 });
