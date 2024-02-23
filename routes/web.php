@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,6 +123,9 @@ use App\Http\Controllers\Admin\ProductsController;
 //     });
 // });
 // ======================client router================================
+Route::get('/', function(){
+    return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
+})-> name('home');
 Route::prefix('categories')->group(function () {
     //Danh sách chuyên mục
     Route::get('/', [CategoriesController::class, 'index'])-> name('categories.list');
@@ -142,6 +146,7 @@ Route::prefix('categories')->group(function () {
     Route::get('/delete/{id}', [CategoriesController::class, 'addCategory'])-> name('categories.delete');
 });
 // ===================Admin route=================
-Route::prefix('admin')->group(function () {
-    Route::resource('products', ProductsController::class);
-}); 
+Route::middleware('auth.login')->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']); 
+    Route::resource('products', ProductsController::class)->middleware('auth.login.product');
+});
