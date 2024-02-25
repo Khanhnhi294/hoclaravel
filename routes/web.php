@@ -78,6 +78,7 @@ use App\Http\Controllers\Admin\DashboardController;
 //         });
 //     });
 // });
+
 // Route::get ('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
 // Route::get ('/tin-tuc', 'HomeController@getNews')->name('news');
@@ -122,6 +123,9 @@ use App\Http\Controllers\Admin\DashboardController;
 //             return "Sua san pham";
 //     });
 // });
+
+
+
 // ======================client router================================
 Route::get('/', function(){
     return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
@@ -152,8 +156,10 @@ Route::prefix('categories')->group(function () {
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.list');
 
 });
+Route::get('san-pham/{id}', [HomeController::class, 'getProductDetail']);
 // ===================Admin route=================
 Route::middleware('auth.login')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index']); 
     Route::resource('products', ProductsController::class)->middleware('auth.login.product');
 });
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
