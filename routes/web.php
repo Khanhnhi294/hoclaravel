@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-// use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -144,6 +144,13 @@ Route::prefix('categories')->group(function () {
 
     //Xóa chuyên mục
     Route::get('/delete/{id}', [CategoriesController::class, 'addCategory'])-> name('categories.delete');
+});
+
+Route::get('/homm',[homeController::class,'index'])->name('home');
+Route::prefix('categories')->group(function () {
+    //List of categories
+    Route::get('/', [CategoriesController::class, 'index'])->name('categories.list');
+
 });
 // ===================Admin route=================
 Route::middleware('auth.login')->prefix('admin')->group(function () {
