@@ -3,18 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class CategoriesController extends Controller
 {
     //
-    public function __construct()
+    public function __construct(Request $request)
     {
+        
+        // echo 'Welcome';
+        /*
+        Nếu là trang danh sách chuyên mục => hiển thị ra dòng chữ: xin chào Unicode
+         */
+        // if ($request-> is('categories')){
+        //     echo '<h3>xin chào Unicode</h3>';
+        // }
     }
     // hiển thị danh sách chuyên mục (Method GET)
-    public function index()
+    public function index(Request $request)
     {
         // return 'Danh sách chuyên mục ';
+        // if(isset($_GET['id'])){
+        //     echo $_GET['id'];
+        // }
+        // $path = $request->path();
+        // echo $path;
+        // $url = $request->url();
+        // $fulUrl = $request->fullUrl();
+        // echo $fulUrl;
+        // $method = $request->method();
+        // echo $method;
+        $ip = $request->ip();
+        // echo 'IP là: '.$ip;
+        // if($request->isMethod('GET')){
+        //     echo 'Phương thức get';
+        // }
+        // $server = $request->serve();
+        // print_r($server);
+        // dd($_SERVER);
+        // $header = $request ->header('user-agent');
+        // dd($header);
+        // $id = $request ->input('id');
+        // echo $id;
+        // $id = $request ->input('id.*.name');
+        // $id = $request->id;
+        // $name =$request->name;
+        // dd($id);
+        $name = request('name', 'Unicode');
+        dd($name);
         return view('client/categories/list');
 
     }
@@ -31,14 +68,19 @@ class CategoriesController extends Controller
 
     }
     // show form thêm dữ liệu (Method GET) 
-    public function addCategory()
+    public function addCategory(Request $request)
     {
         // return 'Form thêm chuyên mục';
+        $path = $request->path();
+        echo $path;
         return view('client/categories/add');
     }
     // thêm data chuyên mục (Method POST)
-    public function handleAddCategory()
+    public function handleAddCategory(Request $request)
     {
+         // $allData = $request->all();
+        // echo $request->all()['name'];
+        // dd($allData);
         redirect(route('categories.add'));
         return 'Thêm dữ liệu cho chuyên mục';
     }
@@ -48,3 +90,4 @@ class CategoriesController extends Controller
         return 'Xóa chuyên mục'.$id;
     }
 }
+
