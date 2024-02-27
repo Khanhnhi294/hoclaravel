@@ -37,6 +37,8 @@ class HomeController extends Controller
     {
         // return 'Chuyen muc: ' . $id;
         $this->data['number'] = 9;
+        $this->data['number'] = 3;
+        $this->data['message'] = 'Đặt hàng thành công';
     }
     public function getProductDetail(){
         return view('home',$this->data);
