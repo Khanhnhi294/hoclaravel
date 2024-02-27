@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 // ======================client router================================
+Route::get('/',[HomeController::class,'index']);
 Route::get('/', function(){
     return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
 })-> name('home');
