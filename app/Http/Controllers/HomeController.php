@@ -11,15 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('/sanpham');
-        // return view('Home');
         $title = "Hoc lap tronhhh";
-        // $dataView = [
-        //     'title'=> $title
-        // ];
-
-        //compact('title')
-        // return view('home')->with('title',$title);    
-        // return View::make('home', compact('title'));
 
         $this->data['Welcome'] = 'Học lập trình Laravel tại <b>Unicode</b>';
         $this->data['content'] = '<h3>Chương 1: Nhập môn Laravel</h3>
@@ -27,6 +19,13 @@ class HomeController extends Controller
         <p>Kiến thức 2</p>
         <p>Kiến thức 3</p>';
         $this->data['index'] =1;
+
+        $this->data['title'] = 'Đào tạo lập trình web';
+        return view('clients.home', $this->data);
+    }
+    public function products(){
+        $this->data['title'] = 'Sản phẩm';
+        return view('clients.products', $this->data);
     }
     public function getNews()
     {
