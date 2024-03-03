@@ -33,11 +33,19 @@
     @extends('layouts.client')
 
     @section('title')
-    <h1>san pham </h1>
+    <h1>TRang chu</h1>
+        @env('local')
+            <p>Moi truowng dev</p>
+            @else
+            <p>khong phai moi truowng dev</p>
+        @endenv
     @push('script')
     <script>
         console.log('push lan 2')
     </script>
+       <script>
+            console.log('push lan 2')
+        </script>
     @endpush
     @endsection
 
