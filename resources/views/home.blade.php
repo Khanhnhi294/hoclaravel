@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>hoc lap trinh</title> -->
     <title>@yield('title') - unicode</title>
-    <style type="text/css" >
-        h1{
+    <style type="text/css">
+        h1 {
             background-color: blueviolet;
             color: aliceblue;
         }
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <h1>header</h1>
         <h2>
             <?php echo $title; ?>
@@ -27,18 +27,35 @@
     </main>
     <footer>
         <h1>footer</h1>
-    </footer> 
-    <hr>
+    </footer>
+    <hr> -->
 
-    <!-- @for ($i = 1; $i<=10;$i++) @if ($i==5) @continue @endif <p>Phần tử thứ: {{$i}}</p>
-        @endfor
+    @extends('layouts.client')
 
-        @php
-        // $message ='Đặt hàng thành công';
-        @endphp
-        @include('parts.notice');
- -->
+    @section('title')
+    <h1>san pham </h1>
+    @push('script')
+    <script>
+        console.log('push lan 2')
+    </script>
+    @endpush
+    @endsection
 
+    @section('sidebar')
+    @parent
+    <h3>home sidebar</h3>
+    @endsection
+
+    @section('content')
+    <h1>TRang chu</h1>
+    @endsection
+    @section('js')
+    @endsection
+    @push('script')
+    <script>
+        console.log('push lan 1')
+    </script>
+    @endpush
 </body>
 
 </html>

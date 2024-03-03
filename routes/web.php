@@ -27,7 +27,13 @@ Route::get('/san-pham', [HomeController::class, 'products']);
 Route::get('/', function(){
     return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
 })-> name('home');
+
 Route::get('/sp',[HomeController::class,'products']);
+
+Route::get('/sp',[HomeController::class,'products']);
+Route::get('/them-sp',[HomeController::class,'getAdd']);
+Route::post('/them-sp',[HomeController::class,'postAdd']);
+Route::put('/them-sp',[HomeController::class,'putAdd']);
 
 
 Route::prefix('categories')->group(function () {
