@@ -27,6 +27,9 @@ Route::get('/san-pham', [HomeController::class, 'products']);
 Route::get('/', function(){
     return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
 })-> name('home');
+Route::get('/sp',[HomeController::class,'products']);
+
+
 Route::prefix('categories')->group(function () {
     //Danh sách chuyên mục
     Route::get('/', [CategoriesController::class, 'index'])-> name('categories.list');
@@ -66,3 +69,20 @@ Route::middleware('auth.login')->prefix('admin')->group(function () {
     Route::resource('products', ProductsController::class)->middleware('auth.login.product');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
+
+// ======================Test=================
+// Route::get('/', function(){
+//     return view('welcome
+//     ');
+// });
+// Route::get('myroute/{ten}', function($ten){
+//     return "Chào bạn".' ' .$ten;
+// });
+// Route::get('myroute/{userID?}/{name?}', function($userID='1' , $name='PNV'){
+//     return "Chào bạn".' '. $userID.' '.$name ;
+// });
+
+
+
+
+

@@ -34,12 +34,18 @@ class HomeController extends Controller
     }
     public function getCategory($id)
     {
-        // return 'Chuyen muc: ' . $id;
-        $this->data['number'] = 9;
-        $this->data['number'] = 3;
-        $this->data['message'] = 'Đặt hàng thành công';
+        return 'Chuyen muc: ' . $id;
+        // $this->data['number'] = 9;
+        // $this->data['number'] = 3;
+        // $this->data['message'] = 'Đặt hàng thành công';
     }
     public function getProductDetail(){
         return view('home',$this->data);
     }
-}
+    public function product(){
+        $this->data['title'] = 'san pham';
+        return view('clients.products',$this->data);
+    }
+    }
+    
+
