@@ -34,18 +34,23 @@
 
     @section('title')
     <h1>TRang chu</h1>
-        @env('local')
-            <p>Moi truowng dev</p>
-            @else
-            <p>khong phai moi truowng dev</p>
-        @endenv
+    @env('local')
+    <p>Moi truowng dev</p>
+    @else
+    <p>khong phai moi truowng dev</p>
+    @endenv
+    <!-- <x-alert type="danger"/> -->
+    <x-alert type="danger" content="dat hang thanh cong" />
+    <!-- <x-package-alert/>
+        <x-inputs.button/>
+        <x-forms-button/> -->
     @push('script')
     <script>
         console.log('push lan 2')
     </script>
-       <script>
-            console.log('push lan 2')
-        </script>
+    <script>
+        console.log('push lan 2')
+    </script>
     @endpush
     @endsection
 
