@@ -34,7 +34,7 @@ Route::get('/sp',[HomeController::class,'products']);
 Route::get('/them-sp',[HomeController::class,'getAdd']);
 Route::post('/them-sp',[HomeController::class,'postAdd']);
 Route::put('/them-sp',[HomeController::class,'putAdd']);
-
+Route::get('/demo',[homeController::class,'getArray']);
 
 Route::prefix('categories')->group(function () {
     //Danh sách chuyên mục

@@ -63,4 +63,12 @@ class HomeController extends Controller
     {
         return $request . 'hihe';
     }
+    public function getArray(){
+        $content = [
+            'name'=>'Mai',
+            'description'=>'sinh  vueb cua PNv',
+            'session'=>'laravel'
+        ];  
+        return $content;
+    }
 }
