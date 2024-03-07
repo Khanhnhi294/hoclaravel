@@ -35,6 +35,7 @@ Route::get('/them-sp',[HomeController::class,'getAdd']);
 Route::post('/them-sp',[HomeController::class,'postAdd']);
 Route::put('/them-sp',[HomeController::class,'putAdd']);
 Route::get('/demo',[homeController::class,'getArray']);
+Route::get('down-load',[homeController::class,'downLoad'])->name('downLoadimage');
 // Route::get('/demo',function(){
 //     $cnten = [
 //         'name'=>'uni',
