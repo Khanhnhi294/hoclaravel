@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('/sanpham');
-        $title = "Hoc lap tronhhh";
+        $title = "Hoc lap trinh";
 
         $this->data['Welcome'] = 'Học lập trình Laravel tại <b>Unicode</b>';
         $this->data['content'] = '<h3>Chương 1: Nhập môn Laravel</h3>
@@ -36,9 +36,7 @@ class HomeController extends Controller
     public function getCategory($id)
     {
         return 'Chuyen muc: ' . $id;
-        // $this->data['number'] = 9;
-        // $this->data['number'] = 3;
-        // $this->data['message'] = 'Đặt hàng thành công';
+    
     }
     public function getProductDetail()
     {
@@ -47,21 +45,36 @@ class HomeController extends Controller
     public function product()
     {
         $this->data['title'] = 'san pham';
-        return view('clients.products', $this->data);
+        return view('client.products', $this->data);
     }
     public function getAdd()
     {
         $this->data['title'] = 'them san pham';
-
-        return view('clients.blocks.add', $this->data);
+        $this->data['errorMessage'] = 'Vui lòng kiểm tra lại dữ liệu';
+        return view('add', $this->data);
     }
     public function postAdd(Request $request)
     {
-        return $request . 'hih';
+        $rules =[
+            'product_name'=> 'required|min:6',
+            'product_price'=> 'required|integer'
+        ];
+        // $errorMessage= [
+        //     'product_name.required'=> "Tên :attribute bắt buộc phải nhập",
+        //     'product_name.required'=> "Tên sp không được nhỏ hơn :min kí tự",
+        //     'product_price.required'=> 'Giá sản phẩm bắt buộc phải nhập',
+        //     'product_price.riquired' => 'Giá sản phẩm phải là số'
+        // ];
+        $errorMessage= [
+            'required' => 'Tên :attribute bắt buộc phải nhập',
+            'min' => 'Trường :attribute không được nhỏ hơn :min kí tự',
+            'integer' => 'Trường :attribute phải là số'
+        ];
+        $request->validate($rules, $errorMessage);
     }
     public function putAdd(Request $request)
     {
-        return $request . 'hihe';
+        return 'Phương thức PUT';
     }
     public function getArray(){
         $content = [

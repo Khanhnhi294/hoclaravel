@@ -16,7 +16,7 @@
     <main>
         <aside>
             @section('sidebar')
-                @include('clients.blocks.sidebar')   
+                @include('client.blocks.sidebar')   
             @show 
         </aside>
         <div class="content">
