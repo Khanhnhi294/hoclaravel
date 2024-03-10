@@ -60,6 +60,12 @@
     @endsection
 
     @section('content')
+    @if(section('msg'))
+    <div class="alert alert-{{section('type')}}">
+    {{section('msg')}}
+    </div>
+        
+    @endif
     <h1>TRang chu</h1>
     @endsection
     @section('js')

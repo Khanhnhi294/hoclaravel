@@ -20,6 +20,12 @@
     </div>
     @endif
 
+    @error
+    <div class="alert alert-anger text-center ">
+        {{$message}}
+    </div>
+    @enderror
+
     <div class="mb-3">
         <label for="">Tên sản phẩm</label>
         <input type="text" class="form-control" name="product_name" placeholder="Tên sản phẩm" value="{{old(product_name)}}">
@@ -35,7 +41,7 @@
         @enderror
     </div>q
 
-@section('css')
-@endsection
-@section('js')
-@endsection
+    @section('css')
+    @endsection
+    @section('js')
+    @endsection
