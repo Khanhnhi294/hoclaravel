@@ -17,7 +17,7 @@
     @extends('layouts.client')
 
     @section('title')
-    <h1>san pham </h1>
+    <h1>Sản phẩm</h1>
     @push('script')
     <script>
         console.log('push lan 2')
@@ -31,8 +31,15 @@
     @endsection
 
     @section('content')
-    <h1>TRang chu</h1>
+    @if(section('msg'))
+    <div class="alert alert-anger text-center ">
+    
+        {{section('msg')}}
+    </div>
+    @endif
+    <h1>Sản phẩm</h1>
     @endsection
+
     @section('js')
     @endsection
     @push('script')

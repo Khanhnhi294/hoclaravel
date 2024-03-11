@@ -65,6 +65,6 @@ class ProductRequest extends FormRequest
     protected function failedAuthorization()
     {
         // throw new AuthorizationException(redirect('/')->with('msg','You can not access here '));
-        throw new HttpClientException(abort(404))
+        throw new HttpClientException(abort(404));
     }
 }
