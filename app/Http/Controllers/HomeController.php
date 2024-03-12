@@ -60,10 +60,15 @@ class HomeController extends Controller
         $rules = [
             // 'product_name' => 'required|min:6',
             // 'product_price' => 'required|integer'
-            // 'product_name' => ['required','min:6', new Uppercase ],
-            'product_name' => 'required|min:6'.( new Uppercase),
-            'product_price' => ['required','integer', new Uppercase ],
-           
+
+            // 'product_name' => 'required|min:6'.( new Uppercase),
+            // 'product_price' => ['required','integer', new Uppercase ],
+
+            'product_name' => ['required', 'min:6', function ($attibute, $value, $fail) {
+               $this->isUppercase( $value,'Trường :attribute không hợp lệ', $fail);
+            }],
+            'product_price' => ['required', 'integer']
+
         ];
         // $errorMessage = [
         //     'product_name.required' => "Tên :attribute bắt buộc phải nhập",
@@ -71,7 +76,7 @@ class HomeController extends Controller
         //     'product_price.required' => 'Giá sản phẩm bắt buộc phải nhập',
         //     'product_price.riquired' => 'Giá sản phẩm phải là số'
         // ];
-        $errorMessage= [
+        $errorMessage = [
             'required' => 'Tên :attribute bắt buộc phải nhập',
             'min' => 'Trường :attribute không được nhỏ hơn :min kí tự',
             'integer' => 'Trường :attribute phải là số',
@@ -79,19 +84,19 @@ class HomeController extends Controller
         ];
         $request->validate($rules, $errorMessage);
 
-        $attibute =[
-            'product_name'=> 'Tên sp',
-            'product_price'=> 'Giá sp'
+        $attibute = [
+            'product_name' => 'Tên sp',
+            'product_price' => 'Giá sp'
         ];
         $validator = validator::make($request->all(), $rules, $errorMessage);
         if ($validator->failed()) {
             // return 'Validate thất bại';
-            $validator->errors()->add('msg','Vui lòng nhập lại');
+            $validator->errors()->add('msg', 'Vui lòng nhập lại');
         } else {
             // return 'Validate thành công';
             return redirect()->route('product');
         }
-        return back()-> withErrors( $validator);
+        return back()->withErrors($validator);
     }
     public function putAdd(Request $request)
     {
@@ -118,6 +123,13 @@ class HomeController extends Controller
             //     echo $imageContent;
             // },$filename);
             return response()->download($image, $fileName);
+        }
+    }
+    public function isUppercase($value, $message, $fail)
+    {
+        if ($value != mb_strtoupper($value)) {
+            //xảy ra lỗi
+            $fail('Trường :attribute không hợp lệ');
         }
     }
 }
