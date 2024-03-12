@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\Uppercase;
 
 class HomeController extends Controller
 {
@@ -57,8 +58,12 @@ class HomeController extends Controller
     public function postAdd(Request $request)
     {
         $rules = [
-            'product_name' => 'required|min:6',
-            'product_price' => 'required|integer'
+            // 'product_name' => 'required|min:6',
+            // 'product_price' => 'required|integer'
+            // 'product_name' => ['required','min:6', new Uppercase ],
+            'product_name' => 'required|min:6'.( new Uppercase),
+            'product_price' => ['required','integer', new Uppercase ],
+           
         ];
         // $errorMessage = [
         //     'product_name.required' => "Tên :attribute bắt buộc phải nhập",
@@ -69,7 +74,8 @@ class HomeController extends Controller
         $errorMessage= [
             'required' => 'Tên :attribute bắt buộc phải nhập',
             'min' => 'Trường :attribute không được nhỏ hơn :min kí tự',
-            'integer' => 'Trường :attribute phải là số'
+            'integer' => 'Trường :attribute phải là số',
+            // 'uppercase'=> 'Trường :attribute phải viết hoa'
         ];
         $request->validate($rules, $errorMessage);
 
