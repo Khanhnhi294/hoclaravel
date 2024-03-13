@@ -55,8 +55,9 @@ class HomeController extends Controller
         $this->data['errorMessage'] = 'Vui lòng kiểm tra lại dữ liệu';
         return view('add', $this->data);
     }
-    public function postAdd(Request $request)
+    public function postAdd(ProductRequest  $request)
     {
+        dd('ok');
         $rules = [
             // 'product_name' => 'required|min:6',
             // 'product_price' => 'required|integer'
@@ -89,14 +90,19 @@ class HomeController extends Controller
             'product_price' => 'Giá sp'
         ];
         $validator = validator::make($request->all(), $rules, $errorMessage);
-        if ($validator->failed()) {
-            // return 'Validate thất bại';
-            $validator->errors()->add('msg', 'Vui lòng nhập lại');
-        } else {
-            // return 'Validate thành công';
-            return redirect()->route('product');
-        }
-        return back()->withErrors($validator);
+        $validator -> validate();
+
+        return response()->json(['status'=>'success']);
+
+        // $validator = validator::make($request->all(), $rules, $errorMessage);
+        // if ($validator->failed()) {
+        //     // return 'Validate thất bại';
+        //     $validator->errors()->add('msg', 'Vui lòng nhập lại');
+        // } else {
+        //     // return 'Validate thành công';
+        //     return redirect()->route('product');
+        // }
+        // return back()->withErrors($validator);
     }
     public function putAdd(Request $request)
     {

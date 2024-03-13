@@ -7,6 +7,7 @@
     <title> @yield('title')-Unicode</title>
     <style class="text/css">
         /* @yield('css') */
+
     </style>
 </head>
 <body>
@@ -16,8 +17,8 @@
     <main>
         <aside>
             @section('sidebar')
-                @include('client.blocks.sidebar')   
-            @show 
+            @include('client.blocks.sidebar')
+            @show
         </aside>
         <div class="content">
             @yield('content')
@@ -26,6 +27,8 @@
     <footer>
         <h1>FOOTER</h1>
     </footer>
-
+    <script type="text" src="https://code.jquery.com/jquery-3.7.1.min.js"> </script>
+@yield('js')
+@stack('scripts')
 </body>
 </html>
