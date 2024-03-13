@@ -32,7 +32,7 @@ Route::get('/sp',[HomeController::class,'products']);
 
 Route::get('/sp',[HomeController::class,'products']);
 Route::get('/them-sp',[HomeController::class,'getAdd']);
-Route::post('/them-sp',[HomeController::class,'postAdd']);
+Route::post('/them-sp',[HomeController::class,'postAdd'])->name('post-add');
 Route::put('/them-sp',[HomeController::class,'putAdd']);
 Route::get('/demo',[homeController::class,'getArray']);
 Route::get('down-load',[homeController::class,'downLoad'])->name('downLoadimage');

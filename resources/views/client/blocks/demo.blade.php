@@ -11,6 +11,3 @@
         @csrf
     </form>
 </div>
-<b5:container>
-    nfkjdn
-</b5:container>
