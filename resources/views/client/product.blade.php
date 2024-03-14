@@ -4,7 +4,6 @@
 @endsection
 
 @section('sidebar')
-    {{-- @parent  --}}
     <h3>Products Sidebar</h3>
 @endsection
 

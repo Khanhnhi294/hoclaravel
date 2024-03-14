@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> @yield('title')-Unicode</title>
     <style class="text/css">
-        /* @yield('css') */
-
     </style>
 </head>
 <body>
@@ -16,7 +14,7 @@
     </header>
     <main>
         <aside>
-            @section('sidebar')
+            @section('sidebar') 
             @include('client.blocks.sidebar')
             @show
         </aside>

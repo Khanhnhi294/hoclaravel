@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\DashboardController;
 
@@ -19,10 +20,10 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 // ======================client router================================
-Route::get('/', [HomeController::class,'index']);
+Route::get('/home', [HomeController::class,'index']);
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/san-pham', [HomeController::class, 'products'])->name('product');
+Route::get('/sanpham', [HomeController::class, 'products'])->name('product');
 
 Route::get('/', function(){
     return '<h1 style: text-align: center; >Trang chủ Unicode </h1>';
@@ -36,18 +37,6 @@ Route::post('/them-sp',[HomeController::class,'postAdd'])->name('post-add');
 Route::put('/them-sp',[HomeController::class,'putAdd']);
 Route::get('/demo',[homeController::class,'getArray']);
 Route::get('down-load',[homeController::class,'downLoad'])->name('downLoadimage');
-// Route::get('/demo',function(){
-//     $cnten = [
-//         'name'=>'uni',
-//         'version'=>'lv10',
-
-//     ];
-//     return response()->json($cnten);
-// });
-// Route::get('/demo-response',function(){
-
-//     return view('demo');
-// });
 
 Route::prefix('categories')->group(function () {
     //Danh sách chuyên mục
@@ -75,13 +64,15 @@ Route::prefix('categories')->group(function () {
     Route::get('upload', [CategoriesController::class,'handleFile'])->name('categories.upload');
 });
 
-Route::get('/homm',[homeController::class,'index'])->name('home');
+Route::get('/home',[homeController::class,'index'])->name('home');
 Route::prefix('categories')->group(function () {
     //List of categories
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.list');
 
 });
 Route::get('san-pham/{id}', [HomeController::class, 'getProductDetail']);
+
+
 // ===================Admin route=================
 Route::middleware('auth.login')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index']); 
@@ -89,17 +80,10 @@ Route::middleware('auth.login')->prefix('admin')->group(function () {
 });
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
 
-// ======================Test=================
-// Route::get('/', function(){
-//     return view('welcome
-//     ');
-// });
-// Route::get('myroute/{ten}', function($ten){
-//     return "Chào bạn".' ' .$ten;
-// });
-// Route::get('myroute/{userID?}/{name?}', function($userID='1' , $name='PNV'){
-//     return "Chào bạn".' '. $userID.' '.$name ;
-// });
+// ====================== User Route =================
+Route::prefix('users')->group(function(){
+    Route::get('/', [UserController::class, 'index']);
+});
 
 
 
