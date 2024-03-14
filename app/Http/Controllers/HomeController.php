@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Rules\Uppercase;
 
 class HomeController extends Controller
@@ -13,27 +14,26 @@ class HomeController extends Controller
     public $data = [];
     public function index()
     {
-        return view('/sanpham');
-        $title = "Hoc lap trinh";
-
         $this->data['Welcome'] = 'Học lập trình Laravel tại <b>Unicode</b>';
-        $this->data['content'] = '<h3>Chương 1: Nhập môn Laravel</h3>
-        <p>Kiến thức 1</p>
-        <p>Kiến thức 2</p>
-        <p>Kiến thức 3</p>';
-        $this->data['index'] = 1;
-
         $this->data['title'] = 'Đào tạo lập trình web';
+        $this->data['message'] = 'Đăng kí tài khoản thành công';
+
+        // $users = DB::select('select * from users ');
+        // $users = DB::select('SELECT * FROM users WHERE id > ?', [1]);
+        $users = DB::select('SELECT * FROM users WHERE email=:email ', ['email'=> 'huda@gmail.com']);
+        dd($users);
+
+
+        // return 'Unicode';
         return view('client.home', $this->data);
     }
     public function products()
     {
         $this->data['title'] = 'Sản phẩm';
-        return view('client.products', $this->data);
+        return view('client.product', $this->data);
     }
     public function getNews()
     {
-        // return 'Danh sach tin tuc';
         $this->data['dataArr'] = [];
     }
     public function getCategory($id)
@@ -66,7 +66,7 @@ class HomeController extends Controller
             // 'product_price' => ['required','integer', new Uppercase ],
 
             'product_name' => ['required', 'min:6', function ($attibute, $value, $fail) {
-               $this->isUppercase( $value,'Trường :attribute không hợp lệ', $fail);
+                $this->isUppercase($value, 'Trường :attribute không hợp lệ', $fail);
             }],
             'product_price' => ['required', 'integer']
 
@@ -90,9 +90,9 @@ class HomeController extends Controller
             'product_price' => 'Giá sp'
         ];
         $validator = validator::make($request->all(), $rules, $errorMessage);
-        $validator -> validate();
+        $validator->validate();
 
-        return response()->json(['status'=>'success']);
+        return response()->json(['status' => 'success']);
 
         // $validator = validator::make($request->all(), $rules, $errorMessage);
         // if ($validator->failed()) {
