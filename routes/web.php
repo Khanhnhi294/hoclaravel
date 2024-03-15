@@ -81,8 +81,10 @@ Route::middleware('auth.login')->prefix('admin')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
 
 // ====================== User Route =================
-Route::prefix('users')->group(function(){
-    Route::get('/', [UserController::class, 'index']);
+Route::prefix('users')->name('user.')->group(function(){
+    Route::get('/', [UserController::class, 'index'])->name('imdex');
+    Route::get('/add', [UserController::class, 'add'])->name('add');
+    Route::post('/add', [UserController::class, 'postAdd'])->name('post-add');
 });
 
 

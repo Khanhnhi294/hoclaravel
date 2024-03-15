@@ -5,6 +5,8 @@
 
 @section('content')
 <h1>{{$title}} </h1>
+<a href="#" class="btn btn-primary">Thêm người dùng</a>
+<hr/>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -16,7 +18,7 @@
     </thead>
     <tbody>
         <tr>
-            @if(!empty($users))
+            @if(!empty($listUser))
              @foreach($users as $key => $item)
 
             <td>{{$key+1}}</td>
@@ -30,9 +32,6 @@
         @endif
         <tr>
             <td colspan=4> Không có người dùng</td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
         </tr>
     </tbody>
 </table>
