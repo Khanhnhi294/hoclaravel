@@ -85,6 +85,9 @@ Route::prefix('users')->name('user.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('imdex');
     Route::get('/add', [UserController::class, 'add'])->name('add');
     Route::post('/add', [UserController::class, 'postAdd'])->name('post-add');
+    Route::post('/edit/{id}',[UserController::class,'getEdit'])->name('edit');
+
+    Route::post('/update',[UserController::class,'postEdit'])->name('post-exit');
 });
 
 
