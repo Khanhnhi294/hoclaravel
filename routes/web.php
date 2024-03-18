@@ -88,6 +88,7 @@ Route::prefix('users')->name('user.')->group(function(){
     Route::post('/edit/{id}',[UserController::class,'getEdit'])->name('edit');
 
     Route::post('/update',[UserController::class,'postEdit'])->name('post-exit');
+    Route::post('/delete/{id}',[UserController::class,'delete'])->name('delete');
 });
 
 
