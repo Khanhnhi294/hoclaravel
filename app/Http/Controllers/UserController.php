@@ -23,6 +23,7 @@ class UserController extends Controller
         dd($statement);
 
         $title = 'Danh sách người dùng';
+        $this->users->learnQueryBuilder();
 
         $listUser = $users->getAllUser();
         return view('client.users.list', compact('title', 'listUser')) ;
