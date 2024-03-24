@@ -84,6 +84,43 @@ class Users extends Model
         ->get();
 
 
+        $status = DB::table('users')->insert([
+        //     'fullname'=>'Nguyễn Văn A',
+        //     'email'=> 'nguyenvana@gmail.com',
+        //     'group_id' => 1,
+        //     'create_at' => date('Y-m-d H:i:s')
+        // ]);
+
+        //dd($status);
+
+        //$lastId = DB::getPdo()->lastInsertId();
+
+        // $lastId = DB::table('users')->insertGetId([
+        //     'fullname' => 'Nguyễn Văn A',
+        //     'email' => 'nguyenvana@gmail.com',
+        //     'group_id' => 1,
+        //     'create_at' => date('Y-m-d H:i:s')
+        // ]);
+
+        // dd($lastId);
+
+        // $status = DB::table('users')
+        // ->where('id',29)
+        // ->update([
+        //     'fullname' => 'Nguyễn Văn B',
+        //     'email' => 'nguyenvanb@gmail.com',
+        //     'update_at' => date('Y-m-d H:i:s')
+        // ]);
+
+        // $status = DB::table('users')
+        // ->where('id',28)
+        // ->delete();
+
+        //Đếm số bản ghi
+        $count = DB::table('users')->where('id','>',20)->count();
+        // $count = count($lists);
+        // dd($count);
+        
         dd($lists);
 
         $sql = DB::getQueryLog();
