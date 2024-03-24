@@ -16,7 +16,7 @@ class UserController extends Controller
         $this->users = new Users();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $statement = $this->users->statementUser("DELETE FROM users");
 
@@ -25,7 +25,33 @@ class UserController extends Controller
         $title = 'Danh sách người dùng';
         $this->users->learnQueryBuilder();
 
-        $listUser = $users->getAllUser();
+
+        $filters = [];
+        $keywords = null;
+
+        if (!empty($request->status)){
+            $status = $request->status;
+            if ($status=='active'){
+                $status = 1;
+            }else{
+                $status = 0;
+            }
+
+            $filters[] = ['users.status','=',$status];
+        }
+
+        if (!empty($request->group_id)){
+            $groupId = $request->group_id;
+
+            $filters[] = ['users.group_id','=',$groupId];
+        }
+
+        if (!empty($request->keywords)){
+            $keywords = $request->keywords;
+        }
+
+
+       $usersList = $this->users->getAllUsers($filters, $keywords);
         return view('client.users.list', compact('title', 'listUser')) ;
     }
     public function add()
